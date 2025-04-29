@@ -4,7 +4,7 @@ import VendingMachine.VendingStates.State;
 
 public class Main {
     public static void main(String[] args) {
-        VendingMachine vendingMachine = new VendingMachine();
+        VendingMachine vendingMachine = VendingMachine.getInstance();
         try {
             System.out.println("*****Filling up the VendingMachine.Inventory*****");
             vendingMachine.getInventory().fillUpInventory(vendingMachine);
@@ -15,13 +15,13 @@ public class Main {
             vendingState.pressInsertCoins(vendingMachine);
 
             vendingState = vendingMachine.getVendingMachineState();
-            vendingState.insertCoin(vendingMachine, Coin.FIVE);
+            vendingState.insertCoin(vendingMachine, Coin.FIFTY);
 
             System.out.println("***** Clicking on Product Selection button *****");
             vendingState.pressProductSelectionButton(vendingMachine);
 
             vendingState = vendingMachine.getVendingMachineState();
-            vendingState.selectProduct(vendingMachine, 121);
+            vendingState.selectProduct(vendingMachine, 101);
 
             displayInventory(vendingMachine);
 

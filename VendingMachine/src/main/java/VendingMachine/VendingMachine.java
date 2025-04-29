@@ -7,11 +7,19 @@ import java.util.ArrayList;
 
 public class VendingMachine {
 
+    private static VendingMachine vendingMachine;
+
+    public static VendingMachine getInstance() {
+        if (vendingMachine == null) {
+            vendingMachine = new VendingMachine();
+        }
+        return vendingMachine;
+    }
     private State vendingMachineState;
     private ArrayList<Coin> coins;
     private Inventory inventory;
 
-    public VendingMachine() {
+    private VendingMachine() {
         this.vendingMachineState = new IdleState();
         this.coins = new ArrayList<>();
         this.inventory = new Inventory(10);
