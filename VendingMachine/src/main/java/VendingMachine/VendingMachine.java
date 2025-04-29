@@ -7,11 +7,15 @@ import java.util.ArrayList;
 
 public class VendingMachine {
 
-    private static VendingMachine vendingMachine;
+    private static volatile VendingMachine vendingMachine;
 
     public static VendingMachine getInstance() {
         if (vendingMachine == null) {
-            vendingMachine = new VendingMachine();
+            synchronized (VendingMachine.class) {
+                if (vendingMachine == null) {
+                    vendingMachine = new VendingMachine();
+                }
+            }
         }
         return vendingMachine;
     }
