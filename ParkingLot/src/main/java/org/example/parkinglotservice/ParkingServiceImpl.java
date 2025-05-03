@@ -10,14 +10,14 @@ import org.example.vehiclecost.VehicleCostImpl;
 import java.time.LocalDateTime;
 
 public class ParkingServiceImpl implements ParkingService {
-    private ParkingLot parkingLot;
+    private final ParkingLot parkingLot;
 
     public ParkingServiceImpl(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
 
     @Override
-    public void parkVehicle(Vehicle vehicle) {
+    public synchronized void parkVehicle(Vehicle vehicle) {
         if (vehicle == null) {
             System.out.println("Invalid vehicle.");
             return;
@@ -42,7 +42,7 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public void unparkVehicle(Vehicle vehicle) {
+    public synchronized void unparkVehicle(Vehicle vehicle) {
         if (vehicle == null) {
             System.out.println("Invalid vehicle.");
             return;
