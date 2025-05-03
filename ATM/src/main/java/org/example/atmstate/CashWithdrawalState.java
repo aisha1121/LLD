@@ -22,6 +22,7 @@ public class CashWithdrawalState extends ATMState {
         if (withdrawalMoney % HUNDRED != 0) {
             System.out.println("Please enter amount multiple of 100!!");
             exit();
+            return;
         }
 
         if (withdrawalMoney > atm.getTotalAmount()) {
@@ -35,8 +36,10 @@ public class CashWithdrawalState extends ATMState {
             atm.deductMoney(withdrawalMoney);
             card.deductMoney(withdrawalMoney);
             MoneyWithdrawalProcessor moneyWithdrawalProcessor = MoneyWithdrawalFactory.getInstance();
-            moneyWithdrawalProcessor.withdrawMoney(atm, withdrawalMoney);
+            moneyWithdrawalProcessor.withdrawMoney(atm, withdrawalMoney, 0, 0, 0);
             System.out.println("Please collect money from tray.");
+            System.out.println("Total amount: " + withdrawalMoney);
+            System.out.println("Your remaining balance is: " + card.getBankBalance());
             exit();
         }
 

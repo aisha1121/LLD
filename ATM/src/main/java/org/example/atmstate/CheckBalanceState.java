@@ -7,7 +7,6 @@ public class CheckBalanceState extends ATMState {
 
     public CheckBalanceState(ATM atm, Card card) {
         this.atm = atm;
-        displayBalance(card);
     }
 
     @Override
@@ -19,6 +18,6 @@ public class CheckBalanceState extends ATMState {
     @Override
     public void exit() {
         System.out.println("Collect your card!");
-        atm.setAtmState(new IdleState(atm));
+        this.atm.setAtmState(new IdleState(atm));
     }
 }

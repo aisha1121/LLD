@@ -10,20 +10,24 @@ public class HundredNoteWithdrawal extends MoneyWithdrawalProcessor{
     }
 
     @Override
-    public void withdrawMoney(ATM atm, int withdrawMoney) {
-        int requiredCountOf2kNotes = withdrawMoney / HUNDRED;
+    public void withdrawMoney(ATM atm, int withdrawMoney, int noOf2kNotes, int noOf500Notes, int noOf100Notes) {
+        int requiredCountOf100Notes = withdrawMoney / HUNDRED;
         int remaining = withdrawMoney % HUNDRED;
-        int countOf2kNotes = atm.getNoOfTwoThousandNotes();
+        int countOf100Notes = atm.getNoOfHundredNotes();
 
-        if (requiredCountOf2kNotes <= countOf2kNotes) {
-            atm.setNoOfTwoThousandNotes(countOf2kNotes - requiredCountOf2kNotes);
+        if (requiredCountOf100Notes <= countOf100Notes) {
+            noOf100Notes = requiredCountOf100Notes;
+            atm.setNoOfHundredNotes(countOf100Notes - requiredCountOf100Notes);
         } else {
-            atm.setNoOfTwoThousandNotes(0);
-            remaining += (requiredCountOf2kNotes - countOf2kNotes)*HUNDRED;
+            atm.setNoOfHundredNotes(0);
+            noOf100Notes = requiredCountOf100Notes - countOf100Notes;
+            remaining += noOf100Notes * HUNDRED;
         }
 
         if (remaining != 0) {
             System.out.println("Something went wrong!");
+        } else {
+            System.out.println("2k notes: " + noOf2kNotes + "\n500 notes: " + noOf500Notes + "\n100 notes: " + noOf100Notes);
         }
     }
 }
