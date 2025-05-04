@@ -73,7 +73,14 @@ public class RentalSystemService {
     }
 
     public void cancelReservation(String reservationId) {
-        reservations.remove(reservationId);
+        Reservation reservation = reservations.get(reservationId);
+        Car car = reservation.getCar();
+        car.lock();
+        try {
+            reservations.remove(reservationId);
+        } finally {
+            car.unlock();
+        }
     }
 
     public boolean processPayment(String reservationId) {
