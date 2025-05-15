@@ -18,20 +18,20 @@ public class LRUCache<K, V> {
         dummyTail.prev = dummyHead;
     }
 
-    public V get(K key) {
+    public synchronized V get(K key) {
         Node<K, V> node = cache.get(key);
         if (node == null) return null;
         moveToHead(node);
         return node.value;
     }
 
-    public void put(K key, V value) {
+    public synchronized void put(K key, V value) {
         Node<K, V> node = cache.get(key);
         if (node != null) {
             node.value = value;
             moveToHead(node);
         } else {
-            Node<K, V> newNode = new Node(key, value);
+            Node<K, V> newNode = new Node<>(key, value);
             cache.put(key, newNode);
             addToHead(newNode);
             if (cache.size() > capacity) {
