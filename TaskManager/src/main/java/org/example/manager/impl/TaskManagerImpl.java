@@ -15,12 +15,10 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TaskManagerImpl implements TaskManager {
     private volatile static TaskManagerImpl instance;
     private Map<String, Task> tasks;
-    private FilterCriteria filterCriteria;
     private final Lock lock = new ReentrantLock();
 
     private TaskManagerImpl() {
         tasks = new ConcurrentHashMap<>();
-        filterCriteria = new FilterCriteria();
     }
 
     public static TaskManagerImpl getInstance() {
